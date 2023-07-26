@@ -471,7 +471,7 @@ process aggregate_all_variants{
         if [[ $phase_vcf == "true" ]]; then
             prefix="phased"
         fi
-        ls merge_output/*.vcf.gz | parallel --jobs 4 "bgzip -d {}"
+        ls merge_output/*.vcf.gz | parallel --tmpdir $PWD --jobs 4 "bgzip -d {}"
 
         pypy $(which clair3.py) SortVcf \
             --input_dir merge_output \
